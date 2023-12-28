@@ -1,0 +1,167 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block detail_page %}
+
+<link href="{% static 'app/css/detail.css'  %}" rel="stylesheet"> <!-- import css-->
+<script src="{% static 'app/js/date.js' %}"></script>
+<script>  
+  function submitForm(link) {
+    var form = link.closest('form');
+    if (form) {
+        form.submit();
+    } else {
+        console.error('Parent node is not a form.');
+    }
+  }
+</script>
+<style>
+  .button {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .button1 {
+    padding: 16px 40px;
+    background-color: rgba(195, 200, 216, 0.514);
+    color: white; 
+    border: 2px solid #41aa0400;
+  }
+  
+  .button1:hover {
+    padding: 16px 60px;
+    background-color: rgba(20, 13, 51, 0.514);
+    color: white;
+  }
+  .button2 {
+    padding: 16px 20px;
+    background-color: rgba(195, 200, 216, 0.514);; 
+    color: white; 
+    border: 2px solid #41aa0400;
+  }
+  
+  .button2:hover {
+    padding: 16px 40px;
+    background-color: rgba(20, 13, 51, 0.514);
+    color: white;
+  }
+  .button3{
+    padding: 5px 5px;
+    color: white; 
+    border: 2px solid #41aa0400;
+  }
+  .button3:hover{
+    padding: 10px 10px;
+    background-color: rgba(20, 13, 51, 0.514);
+    color: white;
+  }
+</style>
+
+<section id="center" class="center_detail clearfix">
+  {% for movie in movie %}
+    <div class="container">
+     <div class="row">
+      <div class="center_detail_main clearfix">
+        <div class="col-sm-4">
+         <div class="center_detail_main_left clearfix">
+           <img src="{{movie.poster.url}}" width="100%">
+         </div>
+        </div>
+        <div class="col-sm-8">
+         <div class="center_detail_main_right clearfix">
+           <h2>{{movie.title}} </h2>
+           <h4>{{movie.sologan}}</h4>
+           <h5>PRECIS</h5>
+           <p> {{movie.description}}</p>
+         </div>
+         
+         <div class="center_detail_main_right_1 clearfix" >
+          <button class="button button1" >
+            <img src ="{% static 'app/img/play.png' %}" width="30" height="30" />
+            <a href="{{movie.trailer_url}}" style="color: white;">Watch Trailer</a>
+          </button>
+          <form method="post" action="{% url 'seats' %}">
+            {% csrf_token %}
+          <button class="button button2">
+            <img src ="{% static 'app/img/tickets.png' %}" width="30" height="30" />
+            <a style="color: white;">
+            Book Tickets</a>
+          </button>
+          </form>
+         </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    
+    {% endfor %}
+</section>
+  
+  <section id="detail">
+   <div class="container">
+    <div class="row">
+      {% for movie in movie %}
+     <div class="detail_main clearfix">
+      <div class="col-sm-4">
+       <div class="detail_main_left clearfix">
+             <div class="click_right clearfix">
+               <h4>DESCRIPTION</h4>
+               <ul>
+                <li><i class="fa fa-backward"></i>  Integer nec odio</li>
+                <li><i class="fa fa-clock-o"></i> {{movie.duration}} minutes</li>
+                <li><i class="fa fa-list"></i> {{movie.display_genre}}</li>
+                <li><i class="fa fa-image"></i> {{movie.director}}</li>
+                <li><i class="fa fa-star"></i> {{movie.cast}}</li>
+               </ul>
+             </div>
+       </div>
+       {% endfor %}
+
+      </div>
+      <div class="col-sm-8">
+      <div class="detail_main_right clearfix">
+          <div class="tab-content clearfix">
+            {% for movie in movie %}
+              <div id="home" class="tab-pane fade in active clearfix">
+                  {% for date_time in date_times %}
+                  <div class="click clearfix">
+                      <h4><a href=""> {{date_time.date.date}} </a></h4>
+                      <div style="display: flex;">
+                      {% for time in date_time.times %}
+                      <ul>
+                        <div style="margin-right: 10px;">
+                          <form method="post" action="{% url 'seats' %}">
+                              {% csrf_token %}
+                              <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                              <input type="hidden" name="date_id" value="{{ date_time.date.id }}">
+                              <input type="hidden" name="time_id" value="{{ time.id }}">
+                              <li type="submit" class="button3 booking-date" data-movie="{{movie.id}}" data-date="{{date_time.date.id}}" data-time="{{time.id}}" data-action="add">
+                                  <a href="javascript:void(0);" onclick="submitForm(this);">{{ time.time }}</a>
+                              </li>
+                          </form>
+                      </ul>
+                      {% endfor %}
+                  </div>
+                  {% endfor %}
+              </div>
+              {% endfor %}
+          </div>
+      </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   
+  </section>
+  <br>
+  <br>
+  <br>
+  
+{% endblock detail_page %}

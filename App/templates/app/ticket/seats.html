@@ -1,0 +1,109 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block seats %}
+<style>
+  .buy-button-container {
+    display: flex;
+    justify-content: center;
+  }
+</style>
+<section id="center" class="center_pricing">
+    <div class="container">
+       <div class="row">
+         <div class="col-sm-12">
+          <div class="center_pricing_1 clearfix">
+            <h1 class="text-center">Seats</h1>
+              <div class="body1">
+                    <ul class="showcase">
+                      <li>
+                        <div class="seat"></div>
+                        <small>Available</small>
+                      </li>
+                      <li>
+                        <div class="seat selected"></div>
+                        <small>Selected</small>
+                      </li>
+                      <li>
+                        <div class="seat sold"></div>
+                        <small>Sold</small>
+                      </li>
+                    </ul>
+                    <form method="post" action="{% url 'product_order' %}">
+                      {% csrf_token %}
+                     <div class="container1 booking-seats" data-seat="seat" data-action="add remove" >
+                      <div class="screen"></div>
+                      <div class="row1">
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                      </div>
+                
+                      <div class="row1">
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                      </div>
+                      <div class="row1">
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                      </div>
+                      <div class="row1">
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                      </div>
+                      <div class="row1">
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                      </div>
+                      <div class="row1">
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                        <div class="seat"></div>
+                      </div>
+                     </div>
+                     <div class="buy-button-container">
+                      <button type="submit" id="buy-btn" >Continue</button>
+                     </div>
+                    </form>
+              </div>
+          </div>
+         </div>
+       </div>
+   </div>
+</section>
+<br>
+<script src="{% static 'app/js/ticket.js' %}"></script>
+{% endblock seats %}

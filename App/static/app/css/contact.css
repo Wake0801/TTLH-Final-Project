@@ -1,0 +1,71 @@
+
+/*********************contact****************/
+
+.center_pages{
+  padding-top:40px;
+  padding-bottom:40px;
+    }
+ 
+ .center_pages .topic h1{
+ font-size:60px;
+ }
+ .center_pages h1{
+ margin-bottom:20px;
+ }
+ .center_pages h2{
+ margin-bottom:20px;
+ }
+ .center_pages h3{
+ margin-bottom:20px;
+ }
+ .center_pages h4{
+ margin-bottom:20px;
+ }
+ .center_pages h5{
+ margin-bottom:20px;
+ }
+ .center_pages h6{
+ margin-bottom:20px;
+ }
+ 
+ .center_pages p{
+ margin-bottom:10px;
+ }
+ .center_pages{
+   overflow:hidden;
+   }
+ /*********************pages_end****************/
+ 
+ @media screen and (max-width : 767px){
+ .center_pages p .btn{
+   margin-bottom:10px;
+   }
+ .center_pages  .label {
+ font-size: 50%;
+ }  
+ .center_pages img{
+   width:100%;
+   margin-top:10px;
+   }	
+ .center_pages{
+ padding-left:10px; 
+ padding-right:10px; 
+ text-align:center;
+  }
+ .center_pages .topic h1{ 
+  font-size:45px;
+  }
+ }
+
+@media (min-width:768px) and (max-width:991px) {
+
+}
+ @media (min-width:992px) and (max-width:1200px) {
+
+ }
+@media (min-width:1201px) and (max-width:1275px) {
+
+ }
+
+
+

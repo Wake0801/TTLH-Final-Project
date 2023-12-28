@@ -1,0 +1,206 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block home %}
+
+  <!-- import css & js home -->
+  <script>
+    let movieFrame = document.querySelector('.movie-frame');
+
+    let mouseLeaveEvent = function() {
+        this.querySelector('.movie-info').style.opacity = 0;
+    };
+
+    let mouseEnterEvent = function() {
+        this.querySelector('.movie-info').style.opacity = 1;
+    };
+
+    movieFrame.addEventListener('mouseleave', mouseLeaveEvent);
+    movieFrame.addEventListener('mouseenter', mouseEnterEvent);
+  </script>
+  <!-- khung phim -->
+  <style>
+    .movie-frame {
+      position: relative;
+      display: inline-block;
+      margin: 20px;
+     }
+     
+     .movie-frame img {
+      width: 300px;
+      height: 450px;
+     }
+     
+     .movie-info {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.712);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 10px;
+     }
+     
+     .movie-frame:hover .movie-info {
+      opacity: 100;
+     }
+  </style>
+  <style>
+    .button {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      text-align: left;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 18px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
+    .button1 {
+      padding: 10px 10px;
+      background-color: rgba(189, 15, 15, 0.836);
+      color: white; 
+      border: 2px solid #41aa0400;
+    }
+    
+    .button1:hover {
+      padding: 10px 10px;
+      background-color: rgba(20, 13, 51, 0.514);
+      color: white;
+    }
+    .button2 {
+      padding: 10px 5px;
+      background-color: rgba(189, 15, 15, 0.836); 
+      color: white; 
+      border: 2px solid #41aa0400;
+    }
+    
+    .button2:hover {
+      padding: 10px 10px;
+      background-color: rgba(20, 13, 51, 0.514);
+      color: white;
+    }
+    .movie-frame {
+      position: relative;
+      justify-content: right;
+    }
+  
+  </style>
+
+
+  <section id="center" class="center_home clearfix">
+    <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+     
+     <div class="overlay"></div>
+   
+     
+     <ol class="carousel-indicators">
+       <li data-target="#bs-carousel" data-slide-to="0" class=""></li>
+       <li data-target="#bs-carousel" data-slide-to="1" class=""></li>
+	     <li data-target="#bs-carousel" data-slide-to="2" class="active"></li>
+     </ol>
+     
+     
+     <div class="carousel-inner">
+       <div class="item slides">
+         <div class="slide-1"></div>
+         <div class="hero">
+           <hgroup>
+               <h1>Avengers EndGame</h1>        
+               <h3>The last war</h3>
+           </hgroup>
+           <button class="btn btn-hero btn-lg" role="button">Book Online</button>
+         </div>
+       </div>
+       <div class="item slides">
+        <div class="slide-2"></div>
+        <div class="hero">        
+          <hgroup>
+            <h1>Black Panther</h1>        
+            <h3>Long live the king.</h3>
+          </hgroup>       
+          <button class="btn btn-hero btn-lg" role="button">Book Online</button>
+        </div>
+        </div>
+        <div class="item slides active">
+        <div class="slide-3"></div>
+        <div class="hero">        
+          <hgroup>
+            <h1>Spiderman</h1>        
+            <h3>No Way Home</h3>
+          </hgroup>
+          <button class="btn btn-hero btn-lg" role="button">Book Online</button>
+        </div>
+        </div>
+       
+     </div> 
+   </div>
+  </section>
+   <section id="booking">
+    <div class="container">
+     <div class="row">
+      <div class="booking clearfix">
+       <div class="col-sm-12">
+        <div class="booking_left_main clearfix">
+              <ul class="nav nav-tabs col-sm-offset-3">
+                 <li class="active"  ><a data-toggle="tab" href="#home">Phim đang chiếu</a></li>
+                 <li><a data-toggle="tab" href="#menu1" >Phim sắp chiếu</a></li>
+               
+              </ul>
+               <div class="tab-content clearfix" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                 <div id="home" class="tab-pane fade in active clearfix ">
+                  {% for movie in movies_NS  %}
+                  <div class="movie-frame" style="flex: 1 0 calc(33.33% - 20px); margin: 10px;" >
+                    <img src="{{movie.poster.url}}" alt="Movie Image" />
+                    <div class="movie-info">
+                       <h3>{{movie.title}}</h3>
+                       <p>{{movie.display_genre}}</p>
+                       <p>{{movie.duration}} minutes</p>
+                       <button class="button button2" >
+                        <a href="{% url "detail" %}?id={{movie.id}}" style="color: black;">Watch Movie Details</a>
+                      </button>
+                      <button class="button button2" >
+                        <a type="submit" class="booking-movie"  data-movie="{{movie.id}}" data-action="add" style="color: black;" href="{% url "detail" %}?id={{movie.id}}">Book Ticket</a>
+                      </button>
+                    </div>
+                  </div>
+                  {% endfor %}
+                 </div>
+                 <div id="menu1" class="tab-pane fade clearfix">
+                  {% for movie in movies_CS  %}
+                  <div class="movie-frame" style="flex: 1 0 calc(33.33% - 20px); margin: 10px;" >
+                    <img src="{{movie.poster.url}}" alt="Movie Image">
+                    <div class="movie-info">
+                       <h3>{{movie.title}}</h3>
+                       <p>{{movie.display_genre}}</p>
+                       <p>{{movie.duration}} minutes</p>
+                       <button class="button button2" >
+                        <a href="{% url "detail" %}?id={{movie.id}}" style="color: black;">Watch Movie Details</a>
+                      </button>
+                      <button class="button button2" >
+                        <a type="submit" class="booking-movie"  data-movie="{{movie.id}}" data-action="add" style="color: black;" href="{% url "detail" %}?id={{movie.id}}">Book Ticket</a>
+                      </button>
+                    </div>
+                 </div>
+                  {% endfor %}
+               </div>
+        </div>
+        
+       </div>
+        </div>
+       </div>
+      </div>
+     
+      </div>
+     </div>
+    </div>
+   </section>
+   <script src="{% static 'app/js/movie.js' %}"></script>
+{% endblock home %}

@@ -1,0 +1,263 @@
+
+/*********************pages****************/
+@import url("https://fonts.googleapis.com/css2?family=Figtree&display=swap");
+
+.center_pages {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.center_pages .topic h1 {
+  font-size: 60px;
+}
+
+.center_pages h1 {
+  margin-bottom: 20px;
+}
+
+.center_pages h2 {
+  margin-bottom: 20px;
+}
+
+.center_pages h3 {
+  margin-bottom: 20px;
+}
+
+.center_pages h4 {
+  margin-bottom: 20px;
+}
+
+.center_pages h5 {
+  margin-bottom: 20px;
+}
+
+.center_pages h6 {
+  margin-bottom: 20px;
+}
+
+.center_pages p {
+  margin-bottom: 10px;
+}
+
+.center_pages {
+  overflow: hidden;
+}
+
+.container1 {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1em;
+  width: 1435px;
+  height: 500px;
+  transition: all 400ms;
+}
+
+.container1:hover .box {
+  filter: grayscale(100%) opacity(24%);
+}
+
+.box {
+  position: relative;
+  background: var(--img) center center;
+  background-size: cover;
+  transition: all 400ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container1 .box:hover {
+  filter: grayscale(0%) opacity(100%);
+}
+
+.container1:has(.box-1:hover) {
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+}
+
+.container1:has(.box-2:hover) {
+  grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+}
+
+.container1:has(.box-3:hover) {
+  grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+}
+
+.container1:has(.box-4:hover) {
+  grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
+}
+
+.box:nth-child(odd) {
+  transform: translateY(16px);
+}
+
+.box:nth-child(even) {
+  transform: translateY(16px);
+}
+
+.box::after {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 20px;
+  background: #000;
+  color: #fff;
+  padding: 10px 10px 10px 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transform: translateY(60px);
+  opacity: 0;
+  transition: all 400ms;
+}
+
+.box:hover::after {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 400ms;
+}
+
+@font-face {
+  font-family: "Geist Sans";
+  src: url("https://assets.codepen.io/605876/GeistVF.ttf") format("truetype");
+}
+
+/* Skeleton stuff */
+li img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+.skeleton {
+  --padding: 1rem;
+  padding: var(--padding);
+  gap: var(--padding);
+  width: 100%;
+  display: grid;
+  grid-template: 1fr 6fr / 15% 6fr;
+  background: var(--bg);
+  max-inline-size: 100%;
+}
+
+.skeleton__block {
+  background: var(--block);
+}
+
+.skeleton__block:first-of-type {
+  grid-row: 1 / -1;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.skeleton__block:last-of-type {
+  width: 100%;
+}
+
+@supports (animation-timeline: scroll()) {
+  .search-controls {
+    animation: shrink both ease-in-out;
+    animation-timeline: scroll();
+    animation-range: 0 calc(var(--header-height) * 0.5);
+  }
+  .search-wrapper {
+    animation: shadow both linear, darken both linear;
+    animation-timeline: scroll();
+    animation-range: calc(var(--header-height) * 1) calc(var(--header-height) * 1.5), calc(var(--header-height) * 1) calc(var(--header-height) * 1.5);
+  }
+  .sneaky-bear {
+    z-index: 10;
+    animation: peak both linear;
+    animation-timeline: scroll();
+    animation-range: calc(var(--header-height) * 1.5) calc(var(--header-height) * 2);
+  }
+  .logo {
+    animation: fade both linear;
+    animation-timeline: scroll();
+    animation-range: 0 calc(var(--header-height) * 0.8);
+  }
+  /* Animations */
+  @keyframes peak {
+    to {
+      transform: rotate(90deg) translateX(calc(var(--header-height) * 0.125)) translateY(50%);
+    }
+  }
+  @keyframes fade {
+    to {
+      opacity: 0;
+      translate: 0 -25%;
+    }
+  }
+
+  @keyframes shrink {
+    to {
+      width: calc(100% - 48px - 1rem);
+    }
+  }
+
+  @keyframes darken {
+    to {
+      background: var(--bg);
+    }
+  }
+
+  @keyframes shadow {
+    to {
+      box-shadow: 0 5px 10px hsl(0 0% 0%);
+    }
+  }
+}
+
+svg {
+  transition: opacity 0.2s;
+}
+
+a[href="#"]:is(:focus, :hover) svg {
+  opacity: 0.5;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+/*********************pages_end****************/
+
+@media screen and (max-width: 767px) {
+  .center_pages p .btn {
+    margin-bottom: 10px;
+  }
+  .center_pages .label {
+    font-size: 50%;
+  }
+  .center_pages img {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .center_pages {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+  }
+  .center_pages .topic h1 {
+    font-size: 45px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  /* Add your styles for this media query */
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  /* Add your styles for this media query */
+}
+
+@media (min-width: 1201px) and (max-width: 1275px) {
+  /* Add your styles for this media query */
+}

@@ -1,0 +1,118 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block payment %}
+  <head>
+    <style>
+      body {
+          padding: 0px;
+          box-sizing: border-box;
+      }
+      .wrap {
+        width: 500px;
+        margin: 0 auto;
+      }
+      .checkout, .order-list{
+        color:black;
+        border: 1px solid #e9eeea;
+      }
+      .checkout{
+        margin-bottom: 16px;
+      }
+      .title{
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        padding: 22px 0;
+        font-size: 22px;
+        background-color: #e9eeea;
+        margin-bottom: 16px;
+      }
+      .item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 16px;
+        padding-bottom: 20px;
+      }
+      .confirm {
+        display: flex;
+        justify-content: center;
+      }
+      .order-list{
+        font-size: 14px;
+      }
+      .product-item {
+        display: flex;
+        align-items: center;
+        padding-bottom: 16px;
+      }
+      .product-item img {
+        padding: 0 16px;
+        width: 35%;
+      }
+      .content h3{
+        font-size: 14px;
+        padding-bottom: 6px;
+      }
+      .content p{
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .content span{
+        padding-left: 8px;
+      }      
+      button {
+        padding: 10px;
+        border-radius: 5px;
+        background-color: dodgerblue;
+        color: white;
+        border: none;
+        display: flex;
+        justify-content: center;
+      }
+      .button_product {
+        display: flex;
+        justify-content: center;
+        }
+    </style>
+  </head>
+  <body>
+    <br>
+    <div class="wrap">
+        <div class="checkout"> 
+         <h1 class="title">MOVIE</h1>
+            {% for movie in items_movie %}
+            <ul>
+                
+                <li class="item">
+                    <img src="{{movie.movie.poster.url}}" alt="" width="25%">
+                    <p>{{movie.movie.title}}</p>
+                    <p>${{movie.movie.price}}</p>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>  
+        <div class="order-list">
+            <h2 class="title">PRODUCT</h2>
+            <ul>
+                {% for product in items_product %}
+                <li class="product-item">
+                    <img src="{{product.product.image.url}}" alt="">
+                    <div class="content">
+                        <h3>{{product.product.name}}</h3>
+                        <p class="text-bold">${{product.product.price}}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <br>
+          <li class="confirm">
+            {{paypal.render}}
+          </li>
+          <div class="button_product">
+            <button><a href="{% url 'cart' %}" style="color: white;">Back To Order Product</a></button>
+          </div>
+    </div>
+  </body>
+  </html>
+{% endblock %}

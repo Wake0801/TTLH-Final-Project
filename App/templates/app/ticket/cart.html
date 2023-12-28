@@ -1,0 +1,133 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block cart %}
+<style>
+    @media (min-width: 1025px) {
+        .h-custom {
+        height: 100vh !important;
+        }
+        }
+</style>
+<section class="h-100 h-custom">
+    <div class="container h-100 py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <h1 class="text-center">Movie</h1>
+          <br>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">MOVIE</th>
+                  <th scope="col" class="h5">Date</th>
+                  <th scope="col" class="h5">Time</th>
+                  <th scope="col" class="h5">Seat Quantity</th>
+                  <th scope="col" class="h5">Price</th>
+                  <th scope="col" class="h5">Total</th>
+                </tr>
+              </thead>
+              {% for item in items  %}
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    <div class="d-flex align-items-start">
+                      <img src="{{item.movie.poster.url}}" class="img-fluid rounded-3"
+                        style="width: 150px;" alt="Book">
+                      <div class="flex-column ms-5">
+                        <p class="mb-2">{{item.movie.title}}</p>
+                        <p class="mb-0">{{item.movie.director}}</p>
+                      </div>
+                    </div>
+                    
+                  </th>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 500;">{{item.date}}</p>
+                  </td>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 500;">{{item.time}}</p>
+                  </td>
+                  <td class="align-middle">
+                    <div class="d-flex flex-row">
+                      <input id="form1" min="0" name="" value="{{item.seats_quantity}}" type="number"
+                        class="form-control form-control-sm" style="width: 50px;" />
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 10;">{{item.movie.price}} $</p>
+                  </td>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 10;">{{item.total_price}} $</p>
+                  </td>
+                </tr>
+              </tbody>
+              {% endfor %}
+            </table>
+          </div>
+          <hr class="my-4">
+          <h1 class="text-center">Product</h1>
+          <br>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">PRODUCT</th>
+                  <th scope="col" class="h5">Name</th>
+                  <th scope="col" class="h5">Price</th>
+                  <th scope="col" class="h5">Quantity</th>
+                  <th scope="col" class="h5">Total</th>
+                </tr>
+              </thead>
+
+              {% for item in items_product %}
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    <div class="d-flex align-items-start">
+                      <img src="{{item.product.image.url}}" class="img-fluid rounded-3"
+                        style="width: 150px;" alt="Book">
+                    </div>
+                    
+                  </th>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 500;">{{item.product.name}}</p>
+                  </td>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 500;">{{item.product.price}}</p>
+                  </td>
+                  <td class="align-middle">
+                    <div class="d-flex flex-row">
+                      <input id="form1" min="0" name="" value="{{item.quantity}}" type="number"
+                        class="form-control form-control-sm" style="width: 50px;" />
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 10;">{{item.total_price}}$</p>
+                  </td>
+                </tr>
+              </tbody>
+              {% endfor %}
+            </table>
+          </div>
+
+          <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+            <div class="card-body p-4">
+              <hr class="my-4">
+              <div class="row">
+                <div style="float: left; padding-right: 100px; line-height: 2;">
+                  <h4 style="font-size: 3rem;">Total: </h4>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg" style="width: 300px; float: right;"> 
+                  <div class="d-flex justify-content-between" style="left: 100px;">
+                    <a href="{% url 'payment'%}" style="color: white"><span>Checkout and Payment</span></a>           
+                  </div>
+                </button>
+              </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+  <br>
+  <hr class="my-4">
+{% endblock cart %}

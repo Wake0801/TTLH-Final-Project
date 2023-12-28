@@ -1,0 +1,193 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block about %}
+<html lang="en">
+  <head>
+	<link href="{% static 'app/css/contact.css'  %}" rel="stylesheet">
+	<!--
+	<script>
+		// Hàm hiển thị hình ảnh và văn bản
+		function showImageAndText() {
+		  // Lặp qua các phần tử `<div>` có lớp `box`
+		  for (const box of document.querySelectorAll(".box")) {
+			// Lấy URL của hình ảnh từ thuộc tính `style`
+			const imgUrl = box.style.getPropertyValue("--img");
+			// Lấy văn bản từ thuộc tính `data-text`
+			const text = box.getAttribute("data-text");
+			// Hiển thị hình ảnh và văn bản
+			box.innerHTML = `<img src="${imgUrl}" alt="${text}">${text}`;
+		  }
+		}
+	  
+		// Gọi hàm hiển thị hình ảnh và văn bản khi trang web tải xong
+		window.onload = showImageAndText;
+	</script>
+	-->
+	<style>
+		.social-link {
+			width: 30px;
+			height: 30px;
+			border: 1px solid #ddd;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #666;
+			border-radius: 50%;
+			
+			font-size: 0.9rem;
+		}
+
+		.social-link:hover,
+		.social-link:focus {
+			background: #ddd;
+			text-decoration: none;
+			color: #555;
+		}
+	</style>
+</head>
+  
+ <body>
+
+  <section id="center" class="center_pages">
+	
+	<div class="container">
+	   <div class="row">
+		<div class="col-sm-12">
+		 <div class="center_pages_main clerfix">
+		  <div class="pages clearfix">
+			   <div class="topic clearfix">
+				<h1 class="text-center">About TTLH</h1>
+			   </div>
+			   <div class="page-header">
+				<div class="contact_1_inner clearfix">
+					<h3>TTLH History</h3>
+				  </div>
+			   </div>
+			  <div class="well">
+				<p>Rạp chiếu phim TTLH được xây dựng tại vị trí trung tâm Nam sài gòn với vị trí đắc địa gần khu dân cư , các trường Đại học và cấp 3 đã phần nào gia tăng một lượng lớn khách hàng không có thơi gian rảnh rỗi để tận hưởng ngày giải trí cuối tuần cùng với gia đình và bạn bè thì Rạp chiếu phim TTLH rất thích hợp để các khán giả quan tâm ở sài gòn.</p>
+				
+			  </div>
+		  </div>
+		</div>	  
+	   </div>
+    </div>
+  </section>
+  <div class="bg-light py-5">
+	<div class="container py-5">
+	  <div class="row mb-4">
+		<div class="contact_1_inner clearfix">
+			<h3>TTLH Team</h3>
+		  </div>
+	  </div>
+	  <br>
+	  
+	  <div class="row text-center">
+		<!-- Team item-->
+		<div class="col-xl-3 col-sm-6 mb-5">
+		  <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'app/img/longbao.jpg'%}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+			<h5 class="mb-0">Nguyễn Bảo Long</h5><span class="small text-uppercase text-muted">Leader</span>
+			<ul class="social mb-0 list-inline mt-3">
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+			</ul>
+		  </div>
+		  <br>
+		</div>
+		<!-- End-->
+		
+  
+		<!-- Team item-->
+		<div class="col-xl-3 col-sm-6 mb-5">
+		  <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'app/img/longbao.jpg'%}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+			<h5 class="mb-0">Nguyễn Duy Tân</h5><span class="small text-uppercase text-muted">Member</span>
+			<ul class="social mb-0 list-inline mt-3">
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+			</ul>
+		  </div>
+		  <br>
+		</div>
+		<!-- End-->
+		
+  
+		<!-- Team item-->
+		<div class="col-xl-3 col-sm-6 mb-5">
+		  <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'app/img/longbao.jpg'%}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+			<h5 class="mb-0">Vũ Phạm Minh Thức</h5><span class="small text-uppercase text-muted">Member</span>
+			<ul class="social mb-0 list-inline mt-3">
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+			</ul>
+		  </div>
+		</div>
+		<!-- End-->
+  
+		<!-- Team item-->
+		<div class="col-xl-3 col-sm-6 mb-5">
+		  <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'app/img/hautran.jpg'%}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+			<h5 class="mb-0">Trần Công Hậu</h5><span class="small text-uppercase text-muted">Member</span>
+			<ul class="social mb-0 list-inline mt-3">
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
+			  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+			</ul>
+		  </div>
+		</div>
+		<!-- End-->
+  
+	  </div>
+	</div>
+   </div>
+
+   <br>
+   <section id="contact">
+	<div class="container">
+	 <div class="row">
+	  <div class="contact_1 clearfix">
+		<div class="contact_1_inner clearfix">
+		  <h3>TTLH Address</h3>
+		</div>
+		<br>
+		<div class="contact_1_inner_1 clearfix">
+		 <div class="col-sm-4">
+		  <div class="contact_1_inner_1_left clearfix">
+		   <h4><a href="#">CINEMA ZONE<br> BRANCH OFFICE</a></h4>
+		   <p>120-160 Dolor  Street, Lorem Do. Integer  CS17 2Xb</p>
+		   <p class="para_1">Address & Contact: <br> <span>012 3456 7890</span></p>
+		  </div>
+		 </div>
+		 <div class="col-sm-4">
+		  <div class="contact_1_inner_1_left clearfix">
+		   <h4><a href="#">CINEMA ZONE<br> LOREM ROAD LONDON </a></h4>
+		   <p>120-160 Dolor  Street, Lorem Do. Integer  CS17 2Xb</p>
+		   <p class="para_1">Address & Contact: <br> <span>012 3456 7890</span></p>
+		  </div>
+		 </div>
+		 <div class="col-sm-4">
+		  <div class="contact_1_inner_1_left clearfix">
+		   <h4><a href="#">CINEMA ZONE<br> WEST SIDE PARIS</a></h4>
+		   <p>120-160 Dolor  Street, Lorem Do. Integer  CS17 2Xb</p>
+		   <p class="para_1">Address & Contact: <br> <span>012 3456 7890</span></p>
+		  </div>
+		 </div>
+		</div>
+	  </div>
+	 </div>
+	</div>
+   </section>
+   <br>
+   <br>
+   <br>
+
+
+ </body>
+       
+</html>
+{% endblock %}

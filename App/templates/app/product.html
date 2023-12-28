@@ -1,0 +1,80 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block product %}
+<html lang="en">
+<head>
+    <style>
+        body1 {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container1 {
+            width: 80%;
+            margin: 0 auto;
+            overflow: auto;
+        }
+
+        .product {
+            float: left;
+            width: 25%;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product img {
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .product:hover img {
+            transform: scale(1.1);
+        }
+
+        .product h2 {
+            margin: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            transition: 0.3s;
+            opacity: 0;
+        }
+
+        .product:hover h2 {
+            opacity: 1;
+        }
+
+        @media screen and (max-width: 600px) {
+            .product {
+                width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .product {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <h1>Products</h1>
+        <br>
+        {% for product in products %}
+        <div class="product">
+            <img src="{{product.image.url}}" alt="Product">
+            <h4>{{product.name}}</h4>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+{% endblock product %}
+</html>

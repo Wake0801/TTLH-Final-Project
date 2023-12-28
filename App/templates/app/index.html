@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cinema TTLH</title>
+    <link href="{% static 'app/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'app/css/global.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/index.css'  %}" rel="stylesheet">
+    <link href="{% static 'app/css/events.css'  %}" rel="stylesheet">
+    <link href="{% static 'app/css/seats.css'%}" rel="stylesheet">
+    <link href="{% static 'app/css/search.css'%}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/font-awesome.min.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
+    <script src="{% static 'app/js/jquery-2.1.1.min.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+  </head>
+  <!-- search -->
+  <style> 
+    .search-box1{
+    }
+    .input-search{
+      height: 50px;
+      width: 50px;
+      border-style: none;
+      padding: 10px;
+      font-size: 18px;
+      letter-spacing: 2px;
+      outline: none;
+      border-radius: 30px;
+      transition: all .5s ease-in-out;
+      background-color: rgba(255, 255, 255, 0);
+      padding-right: 40px;
+      color:#fff;
+    }
+    .input-search::placeholder{
+      color:rgba(255,255,255,.5);
+      font-size: 18px;
+      letter-spacing: 2px;
+      font-weight: 100;
+    }
+    .btn-search{
+      width: 50px;
+      height: 50px;
+      border-style: none;
+      font-size: 20px;
+      font-weight: bold;
+      outline: none;
+      cursor: pointer;
+      border-radius: 50%;
+      position: absolute;
+      right: 0px;
+      color:#ffffff ;
+      background-color:transparent;
+      pointer-events: painted;  
+    }
+    .btn-search:focus ~ .input-search{
+      width: 300px;
+      border-radius: 0px;
+      background-color: transparent;
+      border-bottom:1px solid rgba(255,255,255,.5);
+      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    }
+    .input-search:focus{
+      width: 300px;
+      border-radius: 0px;
+      background-color: transparent;
+      border-bottom:1px solid rgba(255,255,255,.5);
+      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    }
+  </style>
+  <!-- User -->
+  <style>
+    .search-box2{
+      position: absolute;
+    }
+    .user-box {
+      width:100%;
+    }
+    .user-id {
+      height: 50px;
+      position: absolute;
+    }
+    .dropdown-menu {
+      list-style-type: none;
+      display: none;  
+      background: #555; /* Non-rgba compatable browsers */
+      background: rgba(33, 33, 33, 0.9);
+      width: 50px;
+    }
+    
+    .user-id:hover .dropdown-menu {
+      display: block;
+      position: absolute;
+      top: auto;
+      width: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .dropdown-menu ul li {
+      display: block;
+      width:100%;
+      font-size: 1em;
+      color: #fff;
+    }
+    
+    .dropdown-menu ul li:last-child {
+      border-bottom: none;
+    }
+    
+    .dropdown-menu ul li:hover {
+      background: #333;
+      color: #fff;
+    }
+    .move-left {
+      margin-right: 20px;
+    }
+  </style>
+
+ <body>
+  <section id="top">
+   <div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+         <div class="top_2_left">
+          <h1><a href="{% url 'home' %}">TTLH CINEMA</a></h1>
+         </div>
+        </div>
+            <div class="top_1 text-right clearfix">
+                <ul>
+                  <li class="search-box1 border_none_1">
+                    <button class="btn-search move-left"><img src ="{% static 'app/img/search-interface-symbol.png' %}" width="30" height="30"/></button>
+                    <input type="text" class="input-search move-left" placeholder="Movie Search">
+                  </li>
+                  <li class="border_none_1"></li>
+                  <li class="border_none_1"></li>
+                {% if request.user.is_authenticated %}
+                <li class="search-box2 border_none_1 user-id">
+                  <button class="btn-search move-left"><img src ="{% static 'app/img/user.png' %}" width="30" height="30" />
+                    <div class="dropdown-menu">
+                      <ul>
+                        <li class="border_none_1">Hello, {{request.user}}</li>
+                        <class="border_none_1">
+                      </ul>
+                      <ul>
+                        <li class="border_none_1"><a href="{% url "user" %}" style="color: white;">Profile</a></li>
+                        <li class="border_none_1"><a href="{% url "history" %}" style="color: white;">Ticket History</a></li>
+                        <li class="border_none_1"><a href="{% url "signout" %}" style="color: white;">Log Out</a></li>
+                      </ul>
+                    </div>
+                  </button>
+                </li>
+                {% else %}
+                <a  href="{% url "signin" %}" ><li class="border_none_1" >Log in</li></a>
+		            <a  href="{% url "signup" %}" ><li class="border_none_1" >Sign up</li></a>
+                {% endif %}
+                
+              </ul>
+            </div>
+            
+    </div>
+   </div>
+  </section>
+  <section id="header" class="clearfix cd-secondary-nav">
+        <div class="container">
+         <div class="row">
+          <div class="header_main clearfix">
+            <nav class="navbar navbar-default">
+              <div class="navbar-header">
+               <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="{% url 'home' %}">TTLH <span>CINEMA</span></a>
+              </div>
+              <div class="collapse navbar-collapse js-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                 <li><a class="font_tag" href="{% url 'home' %}">HOME</a></li>
+                 <li><a class="font_tag" href="{% url 'movie' %}">MOVIE</a></li>
+                 <li><a class="font_tag" href="{% url 'products' %}">PRODUCT and EVENTS</a></li>
+                 <li><a class="font_tag border_none_1" href="{% url 'about' %}">ABOUT TTLH</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+         </div>
+        </div>
+  </section>
+  <!-- home -->
+  {% block home %}{% endblock home %}
+  {% block about %}{% endblock %}
+  {% block product %}{% endblock product %}
+  
+  <!-- movie -->
+  {% block movie_page %}{% endblock movie_page %}
+  {% block detail_page %}{% endblock detail_page %}
+  {% block product_order %}{% endblock product_order %}
+  
+  <!-- Ticket-->
+  {% block seats %}{% endblock seats %}
+  {% block cart %}{% endblock cart %}
+  {% block payment %}{% endblock payment %}
+  <!-- User -->
+  {% block profile %}{% endblock profile %}
+  {% block history %}{% endblock history %}
+  <!--footer-->
+
+  <footer id="footer_bottom" style="position: relative; width: 100%; text-align: center;">
+    <p> © 2023 <a href="{% url 'about' %}">TTLH Team</a>. Welcome to TTLH Cinema </p>
+  </footer>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+    
+    /*****Fixed Menu******/
+    var secondaryNav = $('.cd-secondary-nav'),
+       secondaryNavTopPosition = secondaryNav.offset().top;
+      $(window).on('scroll', function(){
+        if($(window).scrollTop() > secondaryNavTopPosition ) {
+          secondaryNav.addClass('is-fixed');	
+        } else {
+          secondaryNav.removeClass('is-fixed');
+        }
+      });	
+      
+    });
+    </script>
+ </body>
+</html>
+ 

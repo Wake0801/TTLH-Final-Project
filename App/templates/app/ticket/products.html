@@ -1,0 +1,121 @@
+{% extends "app/index.html" %}
+{% load static %}
+{% block product_order %}
+<link href="{% static 'app/css/pages.css'%}" rel="stylesheet">
+<style>
+  .button_product button {
+    background-color: Red; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+  }
+  .button_product {
+  display: flex;
+  justify-content: center;
+  }
+  .button_product button:hover {
+    background-color: #bda2a08e;
+  }
+</style>
+
+ <section id="center" class="center_pages">
+    <div class="container">
+       <div class="row">
+        <div class="col-sm-12">
+          <div class="center_pages_main clerfix">
+           <div class="pages clearfix">
+               <div class="topic clearfix">
+                <h1 class="text-center">SINGLE</h1>
+               </div>	  
+               <main>
+                    <ul>
+                      {% for product in products_singles  %}
+                        <li class="skeleton">
+                          <div class="skeleton__block">
+                            <img src="{{product.image.url}}" alt="" />
+                          </div>
+                          <div class="skeleton__block">{{product.name}}</div>
+                          <div class="skeleton__block">{{product.price}}
+                              <div class="input-group" style="margin-left: 815px">
+                                  <span class="input-group-btn">
+                                      <button type="button" class="btn btn-danger btn-number minus-btn" onclick="handleMinus('amount{{product.id}}')">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                      </button>
+                                  </span>
+                                  <input type="text" class="form-control input-number" name="amount" id="amount{{product.id}}" value="0">
+                                  <span class="input-group-btn">
+                                      <button type="button" class="btn btn-success btn-number plus-btn" onclick="handlePlus('amount{{product.id}}')"> 
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                      </button>
+                                  </span>
+                              </div>
+                          </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+               </main>
+           </div>
+          </div>
+        </div>
+       </div>
+    </div>
+ </section>
+  
+ <section id="center" class="center_pages">
+      <div class="container">
+         <div class="row">
+          <div class="col-sm-12">
+            <div class="center_pages_main clerfix">
+             <div class="pages clearfix">
+                 <div class="topic clearfix">
+                  <h1 class="text-center">COMBO</h1>
+                 </div>	  
+                 <main>
+                    <form method="post" action="{% url "cart" %}">
+                    {% csrf_token %}
+                      <ul>
+                      {% for product in products_combos %}
+                        <li class="skeleton">
+                          <div class="skeleton__block">
+                            <img src="{{product.image.url}}" alt="" />  <!-- Picture -->
+                          </div> 
+                          <div class="skeleton__block">{{product.name}}</div>
+                          <div class="skeleton__block">{{product.price}}
+                              <div class="input-group" style="margin-left: 815px">
+                                  <span class="input-group-btn">
+                                    <button type="button" class="btn btn-danger btn-number minus-btn" onclick="handleMinus('amount{{product.id}}')">
+                                      <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </span>
+                                <input type="text" class="form-control input-number" name="amount" id="amount{{product.id}}" value="0">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success btn-number plus-btn" onclick="handlePlus('amount{{product.id}}')"> 
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                  </span>
+                              </div>
+                          </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="button_product">
+                      <button type="submit" >Xác nhận</button>
+                     </div>
+                    </form>
+                 </main>
+             </div>
+            </div>
+          </div>
+         </div>
+      </div>
+ </section>
+ <script src="{% static 'app/js/product.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up TTLH Cinema</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <link rel="stylesheet" href="{% static 'app/css/signuplogin.css'%}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+        body{
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1C1D22;
+        }
+        button{
+            padding: 10px;
+        }
+        .notifications{
+            position: fixed;
+            top: 30px;
+            right: 20px;
+        }
+        .toast{
+            position: relative;
+            padding: 10px;
+            color: #fff;
+            margin-bottom: 10px;
+            width: 400px;
+            display: grid;
+            grid-template-columns: 70px 1fr 70px;
+            border-radius: 5px;
+            --color: #0abf30;
+            background-image: 
+                linear-gradient(
+                    to right, #0abf3055, #22242f 30%
+                ); 
+            animation: show 0.3s ease 1 forwards  
+        }
+        .toast i{
+            color: var(--color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: x-large;
+        }
+        .toast .title{
+            font-size: x-large;
+            font-weight: bold;
+        }
+        .toast span, .toast i:nth-child(3){
+            color: #fff;
+            opacity: 0.6;
+        }
+        @keyframes show{
+            0%{
+                transform: translateX(100%);
+            }
+            40%{
+                transform: translateX(-5%);
+            }
+            80%{
+                transform: translateX(0%);
+            }
+            100%{
+                transform: translateX(-10%);
+            }
+        }
+        .toast::before{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color);
+            width: 100%;
+            height: 3px;
+            content: '';
+            box-shadow: 0 0 10px var(--color);
+            animation: timeOut 5s linear 1 forwards
+        }
+        @keyframes timeOut{
+            to{
+                width: 0;
+            }
+        }
+        .toast.error{
+            --color: #f24d4c;
+            background-image: 
+                linear-gradient(
+                    to right, #f24d4c55, #22242F 30%
+                );
+        }
+        .toast.warning{
+            --color: #e9bd0c;
+            background-image: 
+                linear-gradient(
+                    to right, #e9bd0c55, #22242F 30%
+                );
+        }
+        .toast.info{
+            --color: #3498db;
+            background-image: 
+                linear-gradient(
+                    to right, #3498db55, #22242F 30%
+                );
+        }
+    </style>
+</head>
+<body translate="no">
+    <div class="section">
+        <div class="container">
+            <div class="row full-height justify-content-center">
+                <div class="col-12 text-center align-self-center py-5">
+                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                        <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                        <div class="card-3d-wrap mx-auto card-3d-wrap1">
+                            <div class="card-3d-wrapper">
+                                <div class="card-front">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-4">Sign Up TTLH Cinema</h4>
+                                            <form action = "" method = "POST">
+                                                {% csrf_token %}
+                                            <div class="form-group mt-2">
+                                                <input type="text" name="username" class="form-style" placeholder="Your Username" id="username" Required>
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="text" name="fname" class="form-style" placeholder="First Name" id="fname" Required>
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="text" name="lname" class="form-style" placeholder="Last Name" id="lname" Required>
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="email" name="email" class="form-style" placeholder="Email" id="email" Required>
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="password" class="form-style" placeholder="Password" id="password" Required>
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="confirmpassword" class="form-style" placeholder="Confirm Password" id="confirmpassword" Required>
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <button type="submit" class="btn mt-4">Submit</button>
+                                            <p class="mb-0 mt-4 text-center"><a>You have a account ?  </a><a href="{% url "signin" %}" class="link">Sign In Now</a></p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="notifications">
+        {% for message in messages  %}
+            {% if message.level == messages.SUCCESS %}
+                <p class="buttons success"id ="">{{message}}</p>
+            {% else %}
+                <p class="buttons error"id ="">{{message}}</p>
+            {% endif %}
+        {% endfor %}
+        </div>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
+</body>
+
+</html>
