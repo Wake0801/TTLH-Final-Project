@@ -345,7 +345,9 @@ def signout(requests):
     return redirect('signin')
 
 def user(requests):
-    return render(requests, 'app/user/profile.html')
+    user = requests.user
+    context = {'user': user}
+    return render(requests, 'app/user/profile.html', context)
 
 def history(requests):
     user = requests.user
