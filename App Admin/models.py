@@ -1,4 +1,5 @@
 from django.db import models
+from App import models as AppModels
 
 # Supplier
 class ProductSupplier(models.Model):
@@ -11,8 +12,7 @@ class ProductSupplier(models.Model):
         return self.name
     
 class Product(models.Model):
-    name = models.CharField(max_length=50)
-    price = models.FloatField()
+    name = models.ForeignKey(AppModels.Products, on_delete=models.CASCADE)
     supplier = models.ForeignKey(ProductSupplier, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -26,14 +26,15 @@ class CinemaBranch(models.Model):
         return self.name
     
 class CinemaRoom(models.Model):
-    name = models.CharField(max_length=50)
     branch = models.ForeignKey(CinemaBranch, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
     seat = models.IntegerField()
 
     def __str__(self):
         return self.name
 
 class CinemaSeat(models.Model):
+    branch = models.ForeignKey(CinemaBranch, on_delete=models.CASCADE)
     room = models.ForeignKey(CinemaRoom, on_delete=models.CASCADE)
     number_of_seats = models.IntegerField()
     LOAN_STATUS = (
@@ -62,6 +63,7 @@ class CinemaWarehouse(models.Model):
 class CinemaStaff(models.Model):
     branch = models.ForeignKey(CinemaBranch, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
+    date_of_birth = models.DateField()
     address = models.CharField(max_length=100)
     phone = models.CharField(max_length=10)
     email = models.EmailField()
@@ -79,3 +81,10 @@ class CinemaStaff(models.Model):
     )
     def __str__(self):
         return self.name
+    
+class CinemaBill(models.Model):
+    
+    movie = models.ForeignKey(AppModels.Movie, on_delete=models.CASCADE)
+    product = models.ForeignKey(AppModels.Products, on_delete=models.CASCADE)
+
+    

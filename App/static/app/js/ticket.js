@@ -19,7 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
       if (selectedSeats.length === 0) {
       event.preventDefault();
       alert("You haven't choose seat yet!, Please choose seat to continue");
-    }
+      } else {
+        selectedSeats.forEach(function(seat){
+          seat.classList.remove("selected");
+          seat.classList.add("sold");
+        })
+      }
   });
 
   function updateSeat(action, seatCount) {

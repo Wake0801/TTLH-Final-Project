@@ -23,7 +23,7 @@
                 <hr align="center">
             </div>
 			<div class="url">
-                <a href="{% url "history" %}">Buy History</a>
+                <a href="{% url "history" %}">History</a>
                 <hr align="center">
             </div>
         </div>
@@ -36,24 +36,24 @@
 						<table>
 							<tbody>
 								<tr>
-									<td>Name</td>
+									<td>First Name</td>
 									<td>:</td>
-									<td>Profile Name</td>
+									<td>{{user.first_name}}</td>
+								</tr>
+								<tr>
+									<td>Last Name</td>
+									<td>:</td>
+									<td>{{user.last_name}}</td>
 								</tr>
 								<tr>
 									<td>Email</td>
 									<td>:</td>
-									<td>email@gmail.com</td>
+									<td>{{user.email}}</td>
 								</tr>
 								<tr>
 									<td>Address</td>
 									<td>:</td>
-									<td>Address</td>
-								</tr>
-								<tr>
-									<td>Movie Genre</td>
-									<td>:</td>
-									<td>Horror , Romance</td>
+									<td>11, Nguyen Dinh Chieu, P.Da Kao, Q.1</td>
 								</tr>
 							</tbody>
 						</table>

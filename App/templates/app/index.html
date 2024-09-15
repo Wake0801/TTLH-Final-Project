@@ -57,19 +57,7 @@
       background-color:transparent;
       pointer-events: painted;  
     }
-    .btn-search:focus ~ .input-search{
-      width: 300px;
-      border-radius: 0px;
-      background-color: transparent;
-      border-bottom:1px solid rgba(255,255,255,.5);
-      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-    }
-    .input-search:focus{
-      width: 300px;
-      border-radius: 0px;
-      background-color: transparent;
-      border-bottom:1px solid rgba(255,255,255,.5);
-      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    .search-box1:hover .input-search {
     }
   </style>
   <!-- User -->
@@ -133,8 +121,10 @@
             <div class="top_1 text-right clearfix">
                 <ul>
                   <li class="search-box1 border_none_1">
+                    <form>
                     <button class="btn-search move-left"><img src ="{% static 'app/img/search-interface-symbol.png' %}" width="30" height="30"/></button>
                     <input type="text" class="input-search move-left" placeholder="Movie Search">
+                    </form>
                   </li>
                   <li class="border_none_1"></li>
                   <li class="border_none_1"></li>
@@ -143,7 +133,7 @@
                   <button class="btn-search move-left"><img src ="{% static 'app/img/user.png' %}" width="30" height="30" />
                     <div class="dropdown-menu">
                       <ul>
-                        <li class="border_none_1">Hello, {{request.user}}</li>
+                        <li class="border_none_1"><a href="{% url "user" %}" style="color: white;">Hello, {{request.user.last_name}}</a></li>
                         <class="border_none_1">
                       </ul>
                       <ul>
@@ -209,6 +199,7 @@
   <!-- User -->
   {% block profile %}{% endblock profile %}
   {% block history %}{% endblock history %}
+  {% block search %}{% endblock search %}
   <!--footer-->
 
   <footer id="footer_bottom" style="position: relative; width: 100%; text-align: center;">

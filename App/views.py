@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.urls import reverse
 from paypal.standard.forms import PayPalPaymentsForm
+from django.db import connections
+
 
 # Create your views here.
 
@@ -275,6 +277,8 @@ def paymentSuccess(requests):
     booking_confirm.delete()
     product_confirm.delete()
 
+    new_db = connections['admindb']
+
     return render(requests, 'app/ticket/paymentSuccess.html')
 
 def paymentFail(requests):
@@ -344,10 +348,10 @@ def signout(requests):
     messages.success(requests, 'You have been logged out successfully')
     return redirect('signin')
 
-def user(requests):
-    user = requests.user
+def user(request):
+    user = User.objects.get(id=request.user.id)
     context = {'user': user}
-    return render(requests, 'app/user/profile.html', context)
+    return render(request, 'app/user/profile.html', context)
 
 def history(requests):
     user = requests.user
@@ -357,3 +361,12 @@ def history(requests):
         'completed_payments': completed_payments,
     }
     return render(requests, 'app/user/history.html', context)
+
+def search(requests):
+    if requests.method == 'POST':
+        search = requests.POST['search']
+        movies = Movie.objects.filter(title__icontains=search)
+        context = {'movies': movies}
+        return render(requests, 'app/user/search.html', context)
+    return render(requests, 'app/user/search.html')
+

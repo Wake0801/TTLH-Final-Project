@@ -56,7 +56,14 @@ class ShowingTime(models.Model):
 
     def __str__(self) -> str:
         return str(self.time)
-    
+
+class Branch(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return self.name
+
 # Product Model
 class Products(models.Model):
     name = models.CharField(max_length=200)
