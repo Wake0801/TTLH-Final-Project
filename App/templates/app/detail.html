@@ -132,6 +132,8 @@
               <div id="home" class="tab-pane fade in active clearfix">
                   {% for date_time in date_times %}
                   <div class="click clearfix">
+                      <h4><a href=""> {{date_time.branch.name}} </a></h4>
+                      <br>
                       <h4><a href=""> {{date_time.date.date}} </a></h4>
                       <div style="display: flex;">
                       {% for time in date_time.times %}
@@ -140,9 +142,10 @@
                           <form method="post" action="{% url 'seats' %}">
                               {% csrf_token %}
                               <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                              <input type="hidden" name="branch_id" value="{{ date_time.branch.id }}">
                               <input type="hidden" name="date_id" value="{{ date_time.date.id }}">
                               <input type="hidden" name="time_id" value="{{ time.id }}">
-                              <li type="submit" class="button3 booking-date" data-movie="{{movie.id}}" data-date="{{date_time.date.id}}" data-time="{{time.id}}" data-action="add">
+                              <li type="submit" class="button3 booking-date" data-movie="{{movie.id}}" data-branch="{{date_time.branch.id}}" data-date="{{date_time.date.id}}" data-time="{{time.id}}" data-action="add">
                                   <a href="javascript:void(0);" onclick="submitForm(this);">{{ time.time }}</a>
                               </li>
                           </form>

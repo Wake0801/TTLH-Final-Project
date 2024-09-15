@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'App',
+    'AppAdmin',
     'paypal.standard.ipn',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,10 +81,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'admindb':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'admindb.sqlite3',
     },
 }
 

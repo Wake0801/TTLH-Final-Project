@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 # Movie Model
+
 class Genre(models.Model):
     name = models.CharField(max_length=100, help_text="Enter a genre of movie")
 
@@ -42,21 +43,6 @@ class Movie(models.Model):
         return ', '.join(genre.name for genre in self.genre.all()[:3])
     display_genre.short_description = 'Genre'
 
-class ShowingDate(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    date = models.DateField(null=False, blank=False)
-
-    def __str__(self) -> str:
-        return str(self.date)
-
-class ShowingTime(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
-    date = models.ForeignKey(ShowingDate, on_delete=models.CASCADE)
-    time = models.TimeField(null=False, blank=False)
-
-    def __str__(self) -> str:
-        return str(self.time)
-
 class Branch(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
@@ -64,7 +50,25 @@ class Branch(models.Model):
     def __str__(self) -> str:
         return self.name
 
+class ShowingDate(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, null=True)
+    date = models.DateField(null=False, blank=False)
+
+    def __str__(self) -> str:
+        return str(self.date)
+
+class ShowingTime(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, null=True)
+    date = models.ForeignKey(ShowingDate, on_delete=models.CASCADE)
+    time = models.TimeField(null=False, blank=False)
+
+    def __str__(self) -> str:
+        return str(self.time)
+
 # Product Model
+
 class Products(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(max_length=2000)
@@ -86,6 +90,7 @@ class Products(models.Model):
         return self.name
 
 # Order Model
+
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -95,6 +100,7 @@ class Booking(models.Model):
 class BookingComfirm(models.Model):
     user_order = models.ForeignKey(Booking, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, null=True)
     date = models.ForeignKey(ShowingDate, on_delete=models.CASCADE)
     time = models.ForeignKey(ShowingTime, on_delete=models.CASCADE)
     seats_quantity = models.IntegerField(null=False, default=0)
@@ -122,6 +128,7 @@ class ProductComfirm(models.Model):
 class CompletedPayment(models.Model):
     user_order = models.ForeignKey(Booking, on_delete=models.CASCADE, null = True)
     movie = models.ForeignKey(Movie, on_delete=models.SET_NULL, null=True)
+    branch = models.ForeignKey(Branch, on_delete=models.SET_NULL, null=True)
     date = models.ForeignKey(ShowingDate, on_delete=models.SET_NULL, null=True)
     time = models.ForeignKey(ShowingTime, on_delete=models.SET_NULL, null=True)
     seats_quantity = models.IntegerField(null=True)

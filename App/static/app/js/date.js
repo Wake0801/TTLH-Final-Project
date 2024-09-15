@@ -4,21 +4,22 @@ document.addEventListener("DOMContentLoaded", function () {
   dateButtons.forEach(function (button) {
     button.addEventListener('click', function () {
       var movieId = button.dataset.movie;
+      var branchId = button.dataset.branch;
       var dateId = button.dataset.date;
       var timeId = button.dataset.time;
       var action = button.dataset.action;
 
-      console.log('Movie ID:', movieId, 'Date ID:', dateId, 'Time ID:', timeId, 'Action:', action);
+      console.log('Movie ID:', movieId, 'Branch ID:', branchId, 'Date ID:', dateId, 'Time ID:', timeId, 'Action:', action);
 
       if (!dateId || !timeId) {
         alert("Please select a date and time before proceeding.");
       } else {
-        updateDate(movieId, dateId, timeId, action);
+        updateDate(movieId, branchId, dateId, timeId, action);
       }
     });
   });
 
-  function updateDate(movieId, dateId, timeId, action) {
+  function updateDate(movieId, branchId, dateId, timeId, action) {
     var url = '/updateDate/';  
     fetch(url, {
       method: 'POST',
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       body: JSON.stringify({
         'movieId': movieId,
+        'branchId': branchId,
         'dateId': dateId,
         'timeId': timeId,
         'action': action

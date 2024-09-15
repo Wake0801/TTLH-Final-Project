@@ -45,11 +45,15 @@ def movie(requests):
 def detail(request):
     id = request.GET.get('id', None)
     movie = Movie.objects.filter(id=id)
-    dates = ShowingDate.objects.filter(movie=id)
+    movies = Movie.objects.get(id=id)
+    branches = Branch.objects.all()
     date_times = []
-    for date in dates:
-        times = ShowingTime.objects.filter(movie=id, date=date.id)
-        date_times.append({'date': date, 'times': times})
+    for branch in branches:
+        dates = ShowingDate.objects.filter(movie=movies, branch=branch.id)
+        print(branch.id)
+        for date in dates:
+            times = ShowingTime.objects.filter(movie=id, branch=branch.id, date=date.id).distinct()
+            date_times.append({'branch': branch, 'date': date, 'times': times})
     context = {'movie': movie, 'date_times': date_times}
     return render(request, 'app/detail.html', context)
 # Ticket Page
@@ -105,12 +109,14 @@ def updateMovie(requests):
 def updateDate(request):
     data = json.loads(request.body)
     movieId = data.get('movieId')
+    branchId = data.get('branchId')
     dateId = data.get('dateId')
     timeId = data.get('timeId')
     action = data.get('action')
     if request.method == 'POST':
         user = request.user
         movie = Movie.objects.get(id=movieId)
+        branch = Branch.objects.get(id=branchId)
         date = ShowingDate.objects.get(id=dateId)
         time = ShowingTime.objects.get(id=timeId)
 
@@ -120,6 +126,7 @@ def updateDate(request):
         order.save()
         
         request.session['movie'] = movieId
+        request.session['branch'] = branchId
         request.session['date'] = dateId
         request.session['time'] = timeId
 
@@ -137,11 +144,13 @@ def updateSeat(request):
             return JsonResponse({'error': 'Invalid input'}, status=400)
         else:
             movie_id = request.session.get('movie')
+            branch_id = request.session.get('branch')
             date_id = request.session.get('date')
             time_id = request.session.get('time')
 
             user = request.user
             movie = Movie.objects.get(id=movie_id)
+            branch = Branch.objects.get(id=branch_id)
             date = ShowingDate.objects.get(id=date_id)
             time = ShowingTime.objects.get(id=time_id)
 
@@ -160,6 +169,7 @@ def updateSeat(request):
             else:
                 booking = BookingComfirm.objects.create(
                     user_order=order,
+                    branch=branch,
                     movie=movie,
                     date=date,
                     time=time,
@@ -237,9 +247,9 @@ def payment(request):
         'item_product_price' : total_price_product,
         'invoice': uuid.uuid4(),
         'currency_code': 'USD',
-        'notify_url': f'http://{host}{reverse('paypal-ipn')}',
-        'return_url': f'http://{host}{reverse('paymentsuccess')}',
-        'cancel_url': f'http://{host}{reverse('paymentfail')}',
+        'notify_url': f'http://{host}{reverse("paypal-ipn")}',
+        'return_url': f'http://{host}{reverse("paymentsuccess")}',
+        'cancel_url': f'http://{host}{reverse("paymentfail")}',
     }
 
     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
@@ -264,6 +274,7 @@ def paymentSuccess(requests):
     completed_payment = CompletedPayment.objects.create(
         user_order=order,
         movie=booking_confirm.movie,
+        branch=booking_confirm.branch,
         date=booking_confirm.date,
         time=booking_confirm.time,
         seats_quantity=booking_confirm.seats_quantity,

@@ -21,9 +21,9 @@
                   <th scope="col">MOVIE</th>
                   <th scope="col" class="h5">Date</th>
                   <th scope="col" class="h5">Time</th>
-                  <th scope="col" class="h5">Seat Quantity</th>
+                  <th scope="col" class="h5">Cinema Branch</th>
+                  <th scope="col" class="h5">Quantity</th>
                   <th scope="col" class="h5">Price</th>
-                  <th scope="col" class="h5">Total</th>
                 </tr>
               </thead>
               {% for item in items  %}
@@ -38,7 +38,6 @@
                         <p class="mb-0">{{item.movie.director}}</p>
                       </div>
                     </div>
-                    
                   </th>
                   <td class="align-middle">
                     <p class="mb-0" style="font-weight: 500;">{{item.date}}</p>
@@ -47,16 +46,13 @@
                     <p class="mb-0" style="font-weight: 500;">{{item.time}}</p>
                   </td>
                   <td class="align-middle">
-                    <div class="d-flex flex-row">
-                      <input id="form1" min="0" name="" value="{{item.seats_quantity}}" type="number"
-                        class="form-control form-control-sm" style="width: 50px;" />
-                    </div>
+                    <p class="mb-0" style="font-weight: 500;">{{item.branch}}</p>
+                  </td>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 10;"> {{item.seats_quantity}}</p>
                   </td>
                   <td class="align-middle">
                     <p class="mb-0" style="font-weight: 10;">{{item.movie.price}} $</p>
-                  </td>
-                  <td class="align-middle">
-                    <p class="mb-0" style="font-weight: 10;">{{item.total_price}} $</p>
                   </td>
                 </tr>
               </tbody>
